@@ -10,24 +10,13 @@ if(port==null || port==""){
 ourApp.use(express.static('public'))
 ourApp.use(express.json())
 ourApp.use(express.urlencoded({extended:false}))
-ourApp.use(passwordProtected)
+
 connString='mongodb+srv://gsrinivas4:0srinivas@web-demo-9oyf0.mongodb.net/todo?retryWrites=true&w=majority'
 mongodb.connect(connString,{useUnifiedTopology: true },(err,client)=>{
 db=client.db()
 ourApp.listen(port)
 })
-function passwordProtected(req,res,next)
-{
-  res.set('WWW-Authenticate','Basic realm="Simple todo App"')
-  console.log(req.headers.authorization)
-  if(req.headers.authorization=="Basic c3JpOjEyMw==")
-  {
-next()
-  }
-  else{
-res.status(401).send("ianlid")
-  }
-}
+
 ourApp.get('/',(req,res)=>{
 db.collection('todo-items').find().toArray(function(err,items){
 res.send(`
