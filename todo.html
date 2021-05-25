@@ -1,0 +1,53 @@
+
+
+
+<html>
+<head>
+<title>todo app</title>
+</head>
+<body>
+<h1> my todo app</h1>
+<form id="Form">
+<input type="text" id="input_value">
+<button  id="btn">create item</button>
+</form>
+<h3>NEED TO DO</h3>
+<ul id="myList">
+
+</ul>
+
+
+<script>
+
+
+let myform=document.getElementById("Form");
+
+let input=document.getElementById("input_value")
+document.write(input.value)
+let l=document.getElementById("myList")
+myform.addEventListener("submit",(e)=>{
+e.preventDefault()
+if(input.value!="")
+addItem(input.value)
+})
+
+function addItem(val)
+{
+ l.innerHTML+=`<li>${val}<button onclick="deleteItem(this)">delete</button></li>`
+ input.value=""
+ input.focus()
+}
+function deleteItem(btn)
+{
+btn.parentElement.remove()
+}
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
